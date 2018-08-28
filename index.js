@@ -58,6 +58,7 @@ const handleRequest = function (req, res){
             payload = {};
         }
 
+        res.setHeader('Content-Type', 'application-json');
         res.writeHead(statusCode);
         res.end(JSON.stringify(payload));
     });
