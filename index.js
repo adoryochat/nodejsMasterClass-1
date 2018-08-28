@@ -35,6 +35,7 @@ const handleRequest = function (req, res){
     const path = parsedUrl.pathname;
     const query = parsedUrl.query;
     const trimmedPath = path.replace(/^\/+|\/+$/g, '');
+    const method = req.method;
     
 
     let currentRouteHandler;
@@ -46,7 +47,8 @@ const handleRequest = function (req, res){
 
     const data = {
         query,
-        trimmedPath
+        method,
+        path: trimmedPath
     };
 
     currentRouteHandler(data, (statusCode, payload) =>{
