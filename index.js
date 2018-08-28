@@ -80,4 +80,4 @@ const handleRequest = function (req, res){
 
 
 //create and start server
-const server = http.createServer(handleRequest).listen(4000);
+http.createServer(handleRequest).listen(4000);
