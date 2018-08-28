@@ -7,7 +7,14 @@ const handleRoutes = {};
 
 //hello handler
 handleRoutes.hello = (data, cb) =>{
-    cb(200, {message: 'hello world'});
+    switch(data.method){
+        case 'POST':  
+            cb(200, {message: 'hello world'});
+            break;
+        default:
+            handleRoutes.defaultHandler(data, cb);
+    }
+       
 };
 
 //default handler
@@ -35,7 +42,7 @@ const handleRequest = function (req, res){
     const path = parsedUrl.pathname;
     const query = parsedUrl.query;
     const trimmedPath = path.replace(/^\/+|\/+$/g, '');
-    const method = req.method;
+    const method = req.method.toUpperCase();
     
 
     let currentRouteHandler;
@@ -60,6 +67,7 @@ const handleRequest = function (req, res){
             payload = {};
         }
 
+        //send response
         res.setHeader('Content-Type', 'application-json');
         res.writeHead(statusCode);
         res.end(JSON.stringify(payload));
@@ -72,4 +80,4 @@ const handleRequest = function (req, res){
 
 
 //create and start server
-const server = http.createServer(handleRequest).listen(3000);
+const server = http.createServer(handleRequest).listen(4000);
